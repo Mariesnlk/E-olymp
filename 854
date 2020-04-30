@@ -1,0 +1,77 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.StringTokenizer;
+
+public class Vasya {
+    static class Graph {
+        private int count;
+        private int[] ver;
+
+        Graph(int count, int[] ver) {
+            this.count = count;
+            this.ver = ver;
+        }
+    }
+
+    public static void main(String[] args) {
+        BufferedReader bf;
+        PrintWriter out = new PrintWriter(System.out);
+        try {
+            bf = new BufferedReader(new InputStreamReader(System.in));
+            int n = Integer.parseInt(bf.readLine());
+            assert (n >= 1 && n <= 50000);
+            Graph[] array = new Graph[n];
+            for (int j = 0; j < array.length; j++) {
+                array[j] = new Graph(0, new int[1]);
+            }
+            String line;
+
+            for (int i = 0; i < n; i++) {
+                if ((line = bf.readLine()).equals("")) {
+                    continue;
+                }
+
+                StringTokenizer str = new StringTokenizer(line, " ");
+                int k;
+                int length;
+
+                while (str.hasMoreTokens()) {
+                    k = (Integer.parseInt(str.nextToken()) - 1);
+                    length = array[k].ver.length;
+
+                    if (array[k].count == length) {
+                        int[] temp = new int[length * 2];
+                        for (int j = 0; j < length; j++) {
+                            temp[j] = array[k].ver[j];
+                        }
+                        array[k].ver = temp;
+                    }
+
+                    array[k].ver[array[k].count++] = i + 1;
+
+                }
+            }
+
+            out.println(n);
+
+            for (int i = 0; i < array.length; i++) {
+
+                for (int j = 0; j < array[i].count; j++) {
+                    if (array[i].count != 0) {
+
+                        out.print(array[i].ver[j] + " ");
+
+                    }
+                }
+
+                out.println();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        out.flush();
+    }
+}
