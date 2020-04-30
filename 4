@@ -1,0 +1,35 @@
+import java.util.PriorityQueue;
+import java.util.Scanner;
+
+public class QueueEolymp {
+
+
+    public static void main(String[] args) {
+
+        Scanner in = new Scanner(System.in);
+
+        int n = in.nextInt();//array size
+        assert (n >= 1 && n <= 100000);
+        int k = in.nextInt();//amount people
+        assert (k >= 1 && k <= 10000);
+
+        PriorityQueue<Long> queue = new PriorityQueue<>();
+
+        for (int i = 0; i < n; i++) {
+
+            long customer = in.nextLong();
+
+            if (queue.size() != k) {
+                queue.add(customer);
+            } else {
+                queue.add(queue.poll() + customer);
+            }
+
+        }
+
+        while (queue.size() > 1) {
+            queue.poll();
+        }
+        System.out.println(queue.poll());
+    }
+}
