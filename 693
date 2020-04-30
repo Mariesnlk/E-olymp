@@ -1,0 +1,39 @@
+import java.util.Scanner;
+import java.util.Stack;
+
+public class MinStack {
+    public static void main(String[] args) {
+
+        Stack<Long> s = new Stack<>();
+        Scanner sc = new Scanner(System.in);
+
+        long n = sc.nextLong();
+        assert n >= 1 && n < 1000000;
+        long a = sc.nextLong();
+        long b = sc.nextLong();
+        long c = sc.nextLong();
+        long x = sc.nextLong();
+
+        long res = 0;
+
+        for (int i = 0; i < n; i++) {
+            x = ((a * x * x + b * x + c) / 100) % 1000000;
+            if (x % 5 < 2) {
+                if (!s.empty())
+                    s.pop();
+            } else {
+                if (s.empty())
+                    s.push(x);
+                else
+                    s.push(Math.min(s.peek(), x));
+            }
+
+            if (!s.empty())
+                res += s.peek();
+        }
+
+        System.out.println(res);
+        sc.close();
+
+    }
+}
