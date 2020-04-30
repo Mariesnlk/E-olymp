@@ -1,0 +1,44 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.Arrays;
+
+
+public class MergeSort {
+
+    static class Changer implements Comparable<Changer> {
+        int x, y, z;
+
+        Changer(int x, int y, int z) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+
+        @Override
+        public int compareTo(Changer a) {
+            int c = this.x - a.x;
+            return c == 0 ? this.z - a.z : c;
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        String[] s;
+        while (br.ready()) {
+            int n = Integer.parseInt(br.readLine());
+            Changer changers[] = new Changer[n];
+            for (int i = 0; i < n; i++) {
+                s = br.readLine().split(" ");
+                changers[i] = new Changer(Integer.parseInt(s[0]), Integer.parseInt(s[1]), i);
+            }
+            Arrays.sort(changers);
+            for (Changer k : changers)
+                bw.write(k.x + " " + k.y+"\n");
+            bw.close();
+        }
+    }
+}
