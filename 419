@@ -1,0 +1,43 @@
+import java.util.Scanner;
+
+public class Three {
+    public static void main(final String[] args) {
+
+
+        Scanner sc = new Scanner(System.in);
+
+        while (sc.hasNextInt()) {
+            int i = sc.nextInt();
+            int j = sc.nextInt();
+            int low, high;
+            if (i < j) {
+                low = i;
+                high = j;
+            } else {
+                low = j;
+                high = i;
+            }
+            int max = cycle(low);
+            for (int x = low + 1; x <= high; x++) {
+                int l = cycle(x);
+                if (l > max) {
+                    max = l;
+                }
+            }
+            System.out.println(i + " " + j + " " + max);
+        }
+    }
+
+    public static int cycle(int n) {
+        int i = 1;
+        while (n != 1) {
+            if (n % 2 == 0) {
+                n = n / 2;
+            } else {
+                n = (3 * n) + 1;
+            }
+            i++;
+        }
+        return i;
+    }
+}
