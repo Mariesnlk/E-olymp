@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+
+public class Balloon {
+    public static void main(String[] args) {
+        int n;
+        int[] colors;
+        Scanner s;
+        s = new Scanner(System.in);
+
+        while (s.hasNextInt()) {
+            n = s.nextInt();
+            if ((n < 1) && (n > 100000)) {
+                continue;
+            }
+            colors = new int[9];
+            for (int i = 0; i < n; i++)
+                colors[s.nextInt() - 1]++;
+            int max = 0;
+            for (int i = 0; i < colors.length; i++) {
+                if (max < colors[i])
+                    max = colors[i];
+            }
+            System.out.println(n - max);
+
+        }
+    }
+}
