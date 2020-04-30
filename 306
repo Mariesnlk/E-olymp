@@ -1,0 +1,73 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.Comparator;
+
+
+public class DNK implements Comparable {
+    public final static Comparator<String> INV_ORDER = new InvOrder();
+    private static int n;
+
+    public static int getInvCount(String s) {
+        int inv_count = 0;
+        for (int i = 0; i < n - 1; i++)
+            for (int j = i + 1; j < n; j++)
+                if (s.charAt(i) > s.charAt(j))
+                    inv_count++;
+
+        return inv_count;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
+
+    private static class InvOrder implements Comparator<String> {
+        public int compare(String s1, String s2) {
+            if (getInvCount(s1) < getInvCount(s2))
+                return -1;
+            if (getInvCount(s1) > getInvCount(s2))
+                return 1;
+            return 0;
+        }
+    }
+
+    public static void main(String[] args) {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter pw = new PrintWriter(System.out, true);
+        try {
+
+            int t = Integer.parseInt(br.readLine());
+            String[] s;
+            String[] m;
+            for (int i = 0; i < t; i++) {
+                br.readLine();
+                s = br.readLine().split(" ");
+                n = Integer.parseInt(s[0]);
+                assert (n > 0 && n <= 50);
+                m = new String[Integer.parseInt(s[1])];
+                for (int j = 0; j < Integer.parseInt(s[1]); j++) {
+                    m[j] = new String(br.readLine());
+                }
+                Arrays.sort(m, INV_ORDER);
+                for (String f : m) {
+                    pw.println(f);
+                }
+                pw.println();
+            }
+
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        try {
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+}
