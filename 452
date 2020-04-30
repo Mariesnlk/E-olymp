@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Rabbits {
+
+    public static void main(final String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        while (sc.hasNextInt()) {
+            int n = sc.nextInt();
+            int k = sc.nextInt();
+            int r = 1;
+            for (int i = n; i > 0; i--) {
+                if (r > k) {
+                    r -= k;
+                }
+                r *= 2;
+            }
+            System.out.println(r);
+
+        }
+    }
+}
