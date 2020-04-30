@@ -1,0 +1,49 @@
+import java.util.Scanner;
+
+public class Per {
+
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        while (sc.hasNextInt()) {
+            int n = sc.nextInt();
+//            if (n > 10000) {
+//                System.out.println("Error");
+//                break;
+//            }
+             assert n <= 10000;
+            int missingNumber = 0;
+
+            int[] numbers = new int[n + 1];
+
+            for (int i = 0; i < n; i++) {
+                int number = sc.nextInt();
+                // assert n < 2000000;
+                if (number <= n) {
+                    numbers[number] = 1;
+                }
+            }
+
+
+            for (int i = 1; i <= n; i++) {
+
+                if (numbers[i] == 0) {
+                    missingNumber = i;
+                    break;
+                }
+            }
+
+            if (missingNumber <= n) {
+                System.out.println(missingNumber);
+            } else {
+                System.out.println(0);
+
+            }
+
+
+        }
+
+    }
+}
