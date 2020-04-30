@@ -1,0 +1,38 @@
+import java.math.BigInteger;
+import java.util.Scanner;
+
+public class Evolution {
+
+    private final static BigInteger Two = new BigInteger("2");
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        assert ((n >= 1 && (n <= 100)));
+
+        BigInteger n1 = scanner.nextBigInteger();
+        BigInteger n2 = scanner.nextBigInteger();
+        
+        if(n>1){
+            while (!n1.equals(n2)) {
+                if (n1.compareTo(n2) > 0 && n1.compareTo(BigInteger.ONE) > 0) {
+                    n1 = dividing(n1);
+                } else if (n2.compareTo(BigInteger.ONE) > 0) {
+                    n2 = dividing(n2);
+                } else break;
+            }
+            System.out.println(n1);
+
+        }
+    }
+
+
+    private static BigInteger dividing(BigInteger number) {
+
+        if (number.mod(Two).equals(1)) {
+            number = number.add(BigInteger.ZERO);
+        }
+
+        return number.divide(Two);
+    }
+}
