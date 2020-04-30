@@ -1,0 +1,18 @@
+import java.util.Scanner;
+
+public class Gardenist {
+    public static void main(final String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        while (sc.hasNextInt()) {
+            int n = sc.nextInt();
+            int sum = 1;
+            for (int i = 1; i <= n; i++) {
+                sum = sum + i * 2;
+            }
+            System.out.println(sum);
+
+        }
+    }
+}
